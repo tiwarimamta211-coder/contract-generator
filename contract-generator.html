@@ -1,0 +1,1053 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contract Generator Pro | IncomeAIHub</title>
+<meta name="description" content="Generate professional legal contracts instantly - Freelance, NDA, Rental, Employment, Consulting, Loan & Partnership agreements">
+
+<!-- AdSense Placeholder Script -->
+<!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script> -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#0a0a0f;
+  --bg2:#0f0f18;
+  --panel:#12121c;
+  --panel2:#161622;
+  --border:#232336;
+  --cyan:#00fff0;
+  --purple:#a855f7;
+  --green:#10b981;
+  --pink:#ff2e88;
+  --text:#d8e2f0;
+  --text-dim:#8a93a8;
+  --danger:#ff4d6d;
+  --warn:#ffb020;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:'Rajdhani',sans-serif;
+  min-height:100vh;
+  position:relative;
+  overflow-x:hidden;
+}
+
+/* Grid background */
+body::before{
+  content:'';
+  position:fixed;
+  inset:0;
+  background-image:
+    linear-gradient(rgba(0,255,240,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,255,240,0.04) 1px, transparent 1px);
+  background-size:40px 40px;
+  pointer-events:none;
+  z-index:0;
+}
+
+/* Scanline overlay */
+body::after{
+  content:'';
+  position:fixed;
+  inset:0;
+  background:repeating-linear-gradient(
+    0deg,
+    rgba(0,0,0,0.15) 0px,
+    rgba(0,0,0,0.15) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  pointer-events:none;
+  z-index:1000;
+  opacity:0.35;
+}
+
+.app{position:relative;z-index:2;max-width:1500px;margin:0 auto;padding:20px;}
+
+header{
+  text-align:center;
+  padding:30px 20px;
+  border-bottom:1px solid var(--border);
+  margin-bottom:24px;
+  position:relative;
+}
+
+header h1{
+  font-family:'Orbitron',sans-serif;
+  font-size:clamp(24px,5vw,42px);
+  font-weight:900;
+  background:linear-gradient(90deg,var(--cyan),var(--purple),var(--green));
+  -webkit-background-clip:text;
+  background-clip:text;
+  -webkit-text-fill-color:transparent;
+  letter-spacing:2px;
+  text-shadow:0 0 30px rgba(0,255,240,0.2);
+}
+
+header p{
+  color:var(--text-dim);
+  margin-top:8px;
+  font-size:15px;
+  letter-spacing:1px;
+}
+
+.badge-row{
+  display:flex;
+  justify-content:center;
+  gap:10px;
+  margin-top:14px;
+  flex-wrap:wrap;
+}
+
+.badge{
+  font-family:'Share Tech Mono',monospace;
+  font-size:11px;
+  padding:4px 12px;
+  border-radius:20px;
+  border:1px solid var(--cyan);
+  color:var(--cyan);
+  background:rgba(0,255,240,0.05);
+}
+
+.ad-slot{
+  border:1px dashed var(--border);
+  background:var(--panel);
+  color:var(--text-dim);
+  text-align:center;
+  padding:14px;
+  font-family:'Share Tech Mono',monospace;
+  font-size:12px;
+  border-radius:10px;
+  margin:20px 0;
+  letter-spacing:1px;
+}
+
+.layout{
+  display:grid;
+  grid-template-columns:390px 1fr;
+  gap:22px;
+}
+
+@media (max-width:960px){
+  .layout{grid-template-columns:1fr;}
+}
+
+.panel{
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:20px;
+  position:relative;
+}
+
+.panel-title{
+  font-family:'Orbitron',sans-serif;
+  font-size:14px;
+  color:var(--cyan);
+  letter-spacing:1.5px;
+  margin-bottom:16px;
+  padding-bottom:10px;
+  border-bottom:1px solid var(--border);
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+
+.panel-title .dot{
+  width:8px;height:8px;border-radius:50%;
+  background:var(--green);
+  box-shadow:0 0 8px var(--green);
+}
+
+.field-group{margin-bottom:16px;}
+
+.field-group label{
+  display:block;
+  font-size:13px;
+  color:var(--text-dim);
+  margin-bottom:6px;
+  letter-spacing:0.5px;
+  font-weight:600;
+}
+
+.field-group label .req{color:var(--pink);}
+
+select, input[type=text], input[type=number], input[type=date], textarea{
+  width:100%;
+  background:var(--bg2);
+  border:1px solid var(--border);
+  color:var(--text);
+  padding:10px 12px;
+  border-radius:8px;
+  font-family:'Rajdhani',sans-serif;
+  font-size:14.5px;
+  font-weight:500;
+  transition:border-color .2s, box-shadow .2s;
+}
+
+textarea{resize:vertical;min-height:70px;}
+
+select:focus, input:focus, textarea:focus{
+  outline:none;
+  border-color:var(--cyan);
+  box-shadow:0 0 0 3px rgba(0,255,240,0.1);
+}
+
+select{
+  cursor:pointer;
+  font-family:'Rajdhani',sans-serif;
+}
+
+.two-col{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+
+@media (max-width:480px){
+  .two-col{grid-template-columns:1fr;}
+}
+
+.section-label{
+  font-family:'Share Tech Mono',monospace;
+  font-size:11px;
+  color:var(--purple);
+  letter-spacing:1.5px;
+  margin:18px 0 10px;
+  text-transform:uppercase;
+  border-left:3px solid var(--purple);
+  padding-left:8px;
+}
+
+.btn{
+  font-family:'Orbitron',sans-serif;
+  font-size:12.5px;
+  letter-spacing:1px;
+  padding:12px 16px;
+  border-radius:8px;
+  border:none;
+  cursor:pointer;
+  width:100%;
+  transition:transform .15s, box-shadow .15s, opacity .15s;
+  margin-top:8px;
+}
+
+.btn:active{transform:scale(0.97);}
+
+.btn-primary{
+  background:linear-gradient(90deg,var(--cyan),var(--green));
+  color:#00140f;
+  font-weight:700;
+  box-shadow:0 4px 20px rgba(0,255,240,0.15);
+}
+
+.btn-primary:hover{box-shadow:0 4px 25px rgba(0,255,240,0.35);}
+
+.btn-secondary{
+  background:transparent;
+  border:1px solid var(--purple);
+  color:var(--purple);
+}
+
+.btn-secondary:hover{background:rgba(168,85,247,0.1);}
+
+.btn-outline{
+  background:transparent;
+  border:1px solid var(--border);
+  color:var(--text-dim);
+}
+
+.btn-outline:hover{border-color:var(--cyan);color:var(--cyan);}
+
+.btn-danger{
+  background:transparent;
+  border:1px solid var(--danger);
+  color:var(--danger);
+}
+
+.btn-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+
+.draft-list{
+  max-height:160px;
+  overflow-y:auto;
+  margin-top:10px;
+}
+
+.draft-item{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  background:var(--bg2);
+  border:1px solid var(--border);
+  border-radius:8px;
+  padding:8px 10px;
+  margin-bottom:6px;
+  font-size:12.5px;
+}
+
+.draft-item span{
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  max-width:180px;
+}
+
+.draft-item-btns{display:flex;gap:6px;}
+
+.mini-btn{
+  background:transparent;
+  border:1px solid var(--border);
+  color:var(--text-dim);
+  font-size:11px;
+  padding:4px 8px;
+  border-radius:6px;
+  cursor:pointer;
+  font-family:'Share Tech Mono',monospace;
+}
+
+.mini-btn:hover{border-color:var(--cyan);color:var(--cyan);}
+
+.mini-btn.del:hover{border-color:var(--danger);color:var(--danger);}
+
+/* Preview */
+.preview-wrap{
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:0;
+  overflow:hidden;
+}
+
+.preview-toolbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:16px 20px;
+  border-bottom:1px solid var(--border);
+  flex-wrap:wrap;
+  gap:10px;
+}
+
+.preview-toolbar .panel-title{margin:0;padding:0;border:none;}
+
+.toolbar-btns{display:flex;gap:8px;flex-wrap:wrap;}
+
+.toolbar-btns .btn{width:auto;margin:0;padding:9px 14px;font-size:11px;}
+
+#contractPreview{
+  background:#f7f5ef;
+  color:#1a1a1a;
+  font-family:'Georgia','Times New Roman',serif;
+  padding:45px 50px;
+  min-height:600px;
+  line-height:1.7;
+  font-size:15px;
+}
+
+#contractPreview h2{
+  text-align:center;
+  font-size:22px;
+  letter-spacing:1px;
+  margin-bottom:6px;
+  text-transform:uppercase;
+}
+
+#contractPreview .sub{
+  text-align:center;
+  font-size:12.5px;
+  color:#555;
+  margin-bottom:28px;
+  font-family:'Courier New',monospace;
+}
+
+#contractPreview h4{
+  margin-top:22px;
+  margin-bottom:8px;
+  font-size:15.5px;
+  border-bottom:1px solid #ccc;
+  padding-bottom:4px;
+}
+
+#contractPreview p{margin-bottom:10px;text-align:justify;}
+
+#contractPreview .sign-block{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:30px;
+  margin-top:40px;
+}
+
+@media (max-width:600px){
+  #contractPreview{padding:25px 20px;}
+  #contractPreview .sign-block{grid-template-columns:1fr;}
+}
+
+#contractPreview .sign-box{
+  border-top:1px solid #333;
+  padding-top:8px;
+  margin-top:36px;
+}
+
+#contractPreview .sign-name{
+  font-family:'Brush Script MT',cursive;
+  font-size:22px;
+  margin-bottom:2px;
+  min-height:26px;
+}
+
+#contractPreview .empty-note{
+  text-align:center;
+  color:#999;
+  font-family:'Rajdhani',sans-serif;
+  padding:60px 20px;
+}
+
+/* Hindi Guide */
+.guide-toggle{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  cursor:pointer;
+}
+
+.guide-body{
+  display:none;
+  margin-top:14px;
+  font-size:14.5px;
+  line-height:1.7;
+  color:var(--text);
+}
+
+.guide-body.open{display:block;}
+
+.guide-body h5{
+  color:var(--green);
+  margin:14px 0 6px;
+  font-family:'Rajdhani',sans-serif;
+  font-size:15px;
+}
+
+.guide-body ol, .guide-body ul{padding-left:20px;margin-bottom:10px;}
+.guide-body li{margin-bottom:6px;}
+
+.chevron{transition:transform .2s;color:var(--purple);}
+.chevron.open{transform:rotate(180deg);}
+
+.toast{
+  position:fixed;
+  bottom:24px;
+  left:50%;
+  transform:translateX(-50%) translateY(100px);
+  background:var(--panel2);
+  border:1px solid var(--cyan);
+  color:var(--cyan);
+  padding:12px 22px;
+  border-radius:10px;
+  font-family:'Share Tech Mono',monospace;
+  font-size:13px;
+  z-index:9999;
+  transition:transform .3s;
+  box-shadow:0 0 25px rgba(0,255,240,0.2);
+}
+
+.toast.show{transform:translateX(-50%) translateY(0);}
+
+footer{
+  text-align:center;
+  padding:30px 10px 10px;
+  color:var(--text-dim);
+  font-size:12px;
+  font-family:'Share Tech Mono',monospace;
+}
+
+.disclaimer{
+  background:rgba(255,176,32,0.06);
+  border:1px solid var(--warn);
+  color:var(--warn);
+  border-radius:10px;
+  padding:12px 16px;
+  font-size:12.5px;
+  margin:18px 0;
+  line-height:1.6;
+}
+
+/* Print styles */
+@media print{
+  body::before, body::after, header, .layout > .panel, .ad-slot, .preview-toolbar, footer, .guide-panel, .disclaimer{
+    display:none !important;
+  }
+  .layout{display:block !important;}
+  .preview-wrap{border:none;box-shadow:none;}
+  #contractPreview{background:#fff;color:#000;padding:10px;}
+}
+</style>
+</head>
+<body>
+
+<div class="app">
+
+  <header>
+    <h1>⚖ CONTRACT GENERATOR PRO</h1>
+    <p>Professional legal agreements in seconds — built for Indian freelancers, agencies & businesses</p>
+    <div class="badge-row">
+      <span class="badge">7 CONTRACT TYPES</span>
+      <span class="badge">INSTANT PDF</span>
+      <span class="badge">LOCAL SAVE</span>
+      <span class="badge">100% FREE</span>
+    </div>
+  </header>
+
+  <div class="ad-slot">Advertisement Space — 728x90 — ca-pub-XXXXXXXXXXXXXXXX</div>
+
+  <div class="disclaimer">
+    ⚠ DISCLAIMER: This tool generates general-purpose draft contract templates for informational use only. It does not constitute legal advice. Please have any contract reviewed by a qualified lawyer before signing or using it for high-value / sensitive transactions.
+  </div>
+
+  <div class="layout">
+
+    <!-- LEFT PANEL: FORM -->
+    <div class="panel">
+      <div class="panel-title"><span class="dot"></span> CONTRACT SETUP</div>
+
+      <div class="field-group">
+        <label>Contract Type <span class="req">*</span></label>
+        <select id="contractType"></select>
+      </div>
+
+      <div id="dynamicFields"></div>
+
+      <div style="margin-top:18px;">
+        <button class="btn btn-primary" onclick="generateContract()">⚡ GENERATE CONTRACT</button>
+        <div class="btn-row">
+          <button class="btn btn-secondary" onclick="saveDraft()">💾 SAVE DRAFT</button>
+          <button class="btn btn-outline" onclick="clearForm()">🗑 CLEAR</button>
+        </div>
+      </div>
+
+      <div class="section-label">Saved Drafts</div>
+      <div class="draft-list" id="draftList"></div>
+    </div>
+
+    <!-- RIGHT: PREVIEW -->
+    <div class="preview-wrap">
+      <div class="preview-toolbar">
+        <div class="panel-title"><span class="dot"></span> LIVE PREVIEW</div>
+        <div class="toolbar-btns">
+          <button class="btn btn-outline" onclick="copyContract()">📋 COPY TEXT</button>
+          <button class="btn btn-primary" onclick="downloadPDF()">⬇ DOWNLOAD PDF</button>
+        </div>
+      </div>
+      <div id="contractPreview">
+        <div class="empty-note">Fill in the details on the left and click "Generate Contract" to see your live preview here.</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="ad-slot">Advertisement Space — 728x90 — ca-pub-XXXXXXXXXXXXXXXX</div>
+
+  <!-- Hindi Usage Guide -->
+  <div class="panel guide-panel">
+    <div class="guide-toggle" onclick="toggleGuide()">
+      <div class="panel-title" style="border:none;padding:0;margin:0;"><span class="dot"></span> हिंदी उपयोग गाइड (Hindi Usage Guide)</div>
+      <span class="chevron" id="chevIcon">▼</span>
+    </div>
+    <div class="guide-body" id="guideBody">
+      <h5>यह टूल क्या करता है?</h5>
+      <p>Contract Generator Pro आपको बिना किसी वकील के, कुछ ही सेकंड में प्रोफेशनल कॉन्ट्रैक्ट (एग्रीमेंट) बनाने में मदद करता है। यह Freelance Agreement, NDA, Rental Agreement, Employment Offer, Consulting Agreement, Loan Agreement और Partnership Agreement — यानि 7 अलग-अलग प्रकार के कॉन्ट्रैक्ट सपोर्ट करता है।</p>
+
+      <h5>इस्तेमाल कैसे करें?</h5>
+      <ol>
+        <li><b>Contract Type चुनें</b> — ऊपर dropdown से जिस प्रकार का एग्रीमेंट बनाना है, उसे चुनें।</li>
+        <li><b>फॉर्म भरें</b> — दोनों पार्टियों के नाम, पता, तारीख, राशि, और अन्य ज़रूरी जानकारी भरें। लाल * वाले फ़ील्ड ज़रूरी हैं।</li>
+        <li><b>Generate Contract पर क्लिक करें</b> — दाईं तरफ आपका पूरा कॉन्ट्रैक्ट तुरंत तैयार हो जाएगा।</li>
+        <li><b>Download PDF</b> — कॉन्ट्रैक्ट को PDF/Print के रूप में डाउनलोड करें और साइन करने के लिए भेजें।</li>
+        <li><b>Copy Text</b> — पूरा कॉन्ट्रैक्ट टेक्स्ट कॉपी करें और Email/WhatsApp पर भेजें।</li>
+        <li><b>Save Draft</b> — अगर बाद में इस्तेमाल करना है तो ड्राफ्ट को ब्राउज़र में सेव करें (यह आपके कंप्यूटर पर ही सेव होता है, कहीं और नहीं भेजा जाता)।</li>
+      </ol>
+
+      <h5>ज़रूरी सावधानियाँ</h5>
+      <ul>
+        <li>यह एक जनरल-पर्पस टेम्पलेट है — बड़ी डील्स या ज़्यादा राशि वाले कॉन्ट्रैक्ट के लिए वकील से जांच ज़रूर करवाएं।</li>
+        <li>Draft ब्राउज़र की Local Storage में सेव होते हैं, इसलिए ब्राउज़र डेटा/कैश साफ़ करने से ड्राफ्ट डिलीट हो सकते हैं।</li>
+        <li>साइन करने से पहले दोनों पार्टियों की जानकारी दोबारा जांच लें।</li>
+      </ul>
+
+      <h5>किसके लिए उपयोगी है?</h5>
+      <p>Freelancers, Digital Agencies, छोटे बिज़नेस ओनर्स, Landlords/Tenants, Startups और किसी भी व्यक्ति के लिए जिसे जल्दी और भरोसेमंद कॉन्ट्रैक्ट टेम्पलेट चाहिए।</p>
+    </div>
+  </div>
+
+  <footer>
+    IncomeAIHub © Contract Generator Pro — For informational use only, not a substitute for legal counsel.
+  </footer>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ============ CONTRACT TYPE DEFINITIONS ============ */
+const contractTypes = {
+  freelance: {
+    label: "Freelance / Service Agreement",
+    fields: [
+      {id:"partyAName", label:"Client Name / Company", type:"text", required:true, placeholder:"e.g. Acme Pvt Ltd"},
+      {id:"partyAAddress", label:"Client Address", type:"text", required:true, placeholder:"City, State"},
+      {id:"partyBName", label:"Freelancer Name", type:"text", required:true, placeholder:"Your Name"},
+      {id:"partyBAddress", label:"Freelancer Address", type:"text", required:true, placeholder:"City, State"},
+      {id:"effectiveDate", label:"Effective Date", type:"date", required:true},
+      {id:"scope", label:"Scope of Work", type:"textarea", required:true, placeholder:"Describe the deliverables/services"},
+      {id:"amount", label:"Total Fee (INR)", type:"number", required:true, placeholder:"e.g. 50000"},
+      {id:"paymentTerms", label:"Payment Terms", type:"text", required:true, placeholder:"e.g. 50% advance, 50% on delivery"},
+      {id:"duration", label:"Project Duration / Deadline", type:"text", required:true, placeholder:"e.g. 30 days from start date"},
+      {id:"jurisdiction", label:"Governing Jurisdiction", type:"text", required:true, placeholder:"e.g. Gwalior, Madhya Pradesh"}
+    ]
+  },
+  nda: {
+    label: "Non-Disclosure Agreement (NDA)",
+    fields: [
+      {id:"partyAName", label:"Disclosing Party Name", type:"text", required:true, placeholder:"Company/Individual"},
+      {id:"partyAAddress", label:"Disclosing Party Address", type:"text", required:true},
+      {id:"partyBName", label:"Receiving Party Name", type:"text", required:true},
+      {id:"partyBAddress", label:"Receiving Party Address", type:"text", required:true},
+      {id:"effectiveDate", label:"Effective Date", type:"date", required:true},
+      {id:"purpose", label:"Purpose of Disclosure", type:"textarea", required:true, placeholder:"e.g. Discussing potential business partnership"},
+      {id:"duration", label:"Confidentiality Period", type:"text", required:true, placeholder:"e.g. 2 years from effective date"},
+      {id:"jurisdiction", label:"Governing Jurisdiction", type:"text", required:true}
+    ]
+  },
+  rental: {
+    label: "Rental / Lease Agreement",
+    fields: [
+      {id:"partyAName", label:"Landlord Name", type:"text", required:true},
+      {id:"partyAAddress", label:"Landlord Address", type:"text", required:true},
+      {id:"partyBName", label:"Tenant Name", type:"text", required:true},
+      {id:"partyBAddress", label:"Tenant Permanent Address", type:"text", required:true},
+      {id:"propertyAddress", label:"Rental Property Address", type:"text", required:true},
+      {id:"effectiveDate", label:"Lease Start Date", type:"date", required:true},
+      {id:"duration", label:"Lease Duration", type:"text", required:true, placeholder:"e.g. 11 months"},
+      {id:"amount", label:"Monthly Rent (INR)", type:"number", required:true},
+      {id:"deposit", label:"Security Deposit (INR)", type:"number", required:true},
+      {id:"paymentTerms", label:"Rent Due Date / Terms", type:"text", required:true, placeholder:"e.g. 5th of every month"},
+      {id:"jurisdiction", label:"Governing Jurisdiction", type:"text", required:true}
+    ]
+  },
+  employment: {
+    label: "Employment Offer Letter",
+    fields: [
+      {id:"partyAName", label:"Company Name", type:"text", required:true},
+      {id:"partyAAddress", label:"Company Address", type:"text", required:true},
+      {id:"partyBName", label:"Employee Name", type:"text", required:true},
+      {id:"partyBAddress", label:"Employee Address", type:"text", required:true},
+      {id:"designation", label:"Job Title / Designation", type:"text", required:true, placeholder:"e.g. Marketing Executive"},
+      {id:"effectiveDate", label:"Joining Date", type:"date", required:true},
+      {id:"amount", label:"Annual CTC (INR)", type:"number", required:true},
+      {id:"paymentTerms", label:"Salary Payment Cycle", type:"text", required:true, placeholder:"e.g. Monthly, on the last working day"},
+      {id:"duration", label:"Probation Period", type:"text", required:true, placeholder:"e.g. 3 months"},
+      {id:"jurisdiction", label:"Governing Jurisdiction", type:"text", required:true}
+    ]
+  },
+  consulting: {
+    label: "Consulting Agreement",
+    fields: [
+      {id:"partyAName", label:"Client Name / Company", type:"text", required:true},
+      {id:"partyAAddress", label:"Client Address", type:"text", required:true},
+      {id:"partyBName", label:"Consultant Name", type:"text", required:true},
+      {id:"partyBAddress", label:"Consultant Address", type:"text", required:true},
+      {id:"effectiveDate", label:"Effective Date", type:"date", required:true},
+      {id:"scope", label:"Scope of Consulting Services", type:"textarea", required:true},
+      {id:"amount", label:"Consulting Fee (INR)", type:"number", required:true},
+      {id:"paymentTerms", label:"Fee Structure", type:"text", required:true, placeholder:"e.g. Hourly / Monthly retainer"},
+      {id:"duration", label:"Engagement Duration", type:"text", required:true, placeholder:"e.g. 6 months, renewable"},
+      {id:"jurisdiction", label:"Governing Jurisdiction", type:"text", required:true}
+    ]
+  },
+  loan: {
+    label: "Loan Agreement",
+    fields: [
+      {id:"partyAName", label:"Lender Name", type:"text", required:true},
+      {id:"partyAAddress", label:"Lender Address", type:"text", required:true},
+      {id:"partyBName", label:"Borrower Name", type:"text", required:true},
+      {id:"partyBAddress", label:"Borrower Address", type:"text", required:true},
+      {id:"effectiveDate", label:"Loan Date", type:"date", required:true},
+      {id:"amount", label:"Loan Amount (INR)", type:"number", required:true},
+      {id:"interestRate", label:"Interest Rate (% per annum)", type:"number", required:false, placeholder:"e.g. 8 (leave blank if interest-free)"},
+      {id:"duration", label:"Repayment Period", type:"text", required:true, placeholder:"e.g. 12 months"},
+      {id:"paymentTerms", label:"Repayment Schedule", type:"text", required:true, placeholder:"e.g. Equal monthly instalments"},
+      {id:"jurisdiction", label:"Governing Jurisdiction", type:"text", required:true}
+    ]
+  },
+  partnership: {
+    label: "Business Partnership Agreement",
+    fields: [
+      {id:"partyAName", label:"Partner 1 Name", type:"text", required:true},
+      {id:"partyAAddress", label:"Partner 1 Address", type:"text", required:true},
+      {id:"partyBName", label:"Partner 2 Name", type:"text", required:true},
+      {id:"partyBAddress", label:"Partner 2 Address", type:"text", required:true},
+      {id:"businessName", label:"Business Name", type:"text", required:true},
+      {id:"effectiveDate", label:"Effective Date", type:"date", required:true},
+      {id:"scope", label:"Nature of Business", type:"textarea", required:true},
+      {id:"amount", label:"Total Capital Investment (INR)", type:"number", required:true},
+      {id:"profitSplit", label:"Profit / Loss Sharing Ratio", type:"text", required:true, placeholder:"e.g. 50:50"},
+      {id:"duration", label:"Partnership Term", type:"text", required:true, placeholder:"e.g. Ongoing until dissolved by mutual consent"},
+      {id:"jurisdiction", label:"Governing Jurisdiction", type:"text", required:true}
+    ]
+  }
+};
+
+/* ============ INIT ============ */
+const typeSelect = document.getElementById('contractType');
+Object.keys(contractTypes).forEach(key=>{
+  const opt = document.createElement('option');
+  opt.value = key;
+  opt.textContent = contractTypes[key].label;
+  typeSelect.appendChild(opt);
+});
+
+typeSelect.addEventListener('change', renderFields);
+
+function renderFields(){
+  const type = typeSelect.value;
+  const def = contractTypes[type];
+  const container = document.getElementById('dynamicFields');
+  container.innerHTML = '';
+
+  container.insertAdjacentHTML('beforeend', `<div class="section-label">Party & Basic Details</div>`);
+
+  def.fields.forEach(f=>{
+    const req = f.required ? '<span class="req">*</span>' : '';
+    let inputHtml = '';
+    if(f.type === 'textarea'){
+      inputHtml = `<textarea id="${f.id}" placeholder="${f.placeholder||''}"></textarea>`;
+    } else {
+      inputHtml = `<input type="${f.type}" id="${f.id}" placeholder="${f.placeholder||''}">`;
+    }
+    container.insertAdjacentHTML('beforeend', `
+      <div class="field-group">
+        <label>${f.label} ${req}</label>
+        ${inputHtml}
+      </div>
+    `);
+  });
+
+  container.insertAdjacentHTML('beforeend', `<div class="section-label">Signatures</div>`);
+  container.insertAdjacentHTML('beforeend', `
+    <div class="two-col">
+      <div class="field-group">
+        <label>Party A Signatory Name</label>
+        <input type="text" id="sigA" placeholder="Typed full name">
+      </div>
+      <div class="field-group">
+        <label>Party B Signatory Name</label>
+        <input type="text" id="sigB" placeholder="Typed full name">
+      </div>
+    </div>
+  `);
+}
+
+renderFields();
+
+/* ============ HELPERS ============ */
+function fmtINR(num){
+  if(num === '' || num === null || isNaN(num)) return '';
+  return '₹' + Number(num).toLocaleString('en-IN');
+}
+
+function fmtDate(dateStr){
+  if(!dateStr) return '_________';
+  const d = new Date(dateStr);
+  if(isNaN(d)) return dateStr;
+  return d.toLocaleDateString('en-IN', {day:'2-digit', month:'long', year:'numeric'});
+}
+
+function val(id){
+  const el = document.getElementById(id);
+  return el ? el.value.trim() : '';
+}
+
+function todayDate(){
+  return new Date().toLocaleDateString('en-IN', {day:'2-digit', month:'long', year:'numeric'});
+}
+
+function showToast(msg){
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'), 2200);
+}
+
+/* ============ CONTRACT TEXT BUILDERS ============ */
+function collectData(){
+  const type = typeSelect.value;
+  const def = contractTypes[type];
+  const data = {type};
+  def.fields.forEach(f=> data[f.id] = val(f.id));
+  data.sigA = val('sigA');
+  data.sigB = val('sigB');
+  return data;
+}
+
+function validateRequired(data){
+  const def = contractTypes[data.type];
+  const missing = def.fields.filter(f=>f.required && !data[f.id]);
+  return missing;
+}
+
+function buildContract(data){
+  const type = data.type;
+  const genDate = todayDate();
+  let title = contractTypes[type].label.toUpperCase();
+  let body = '';
+
+  const partyALabelMap = {
+    freelance:'CLIENT', nda:'DISCLOSING PARTY', rental:'LANDLORD (LESSOR)',
+    employment:'EMPLOYER', consulting:'CLIENT', loan:'LENDER', partnership:'PARTNER 1'
+  };
+  const partyBLabelMap = {
+    freelance:'FREELANCER (SERVICE PROVIDER)', nda:'RECEIVING PARTY', rental:'TENANT (LESSEE)',
+    employment:'EMPLOYEE', consulting:'CONSULTANT', loan:'BORROWER', partnership:'PARTNER 2'
+  };
+  const aLabel = partyALabelMap[type];
+  const bLabel = partyBLabelMap[type];
+
+  body += `<p><b>This Agreement</b> is made and entered into on <b>${fmtDate(data.effectiveDate)}</b>, by and between:</p>`;
+  body += `<p><b>${data.partyAName}</b>, residing/located at ${data.partyAAddress} (hereinafter referred to as the "${aLabel}"),</p>`;
+  body += `<p>AND</p>`;
+  body += `<p><b>${data.partyBName}</b>, residing/located at ${data.partyBAddress} (hereinafter referred to as the "${bLabel}").</p>`;
+  body += `<p>The ${aLabel} and ${bLabel} shall collectively be referred to as the "Parties" and individually as a "Party".</p>`;
+
+  if(type === 'freelance'){
+    body += `<h4>1. Scope of Work</h4><p>The ${bLabel} agrees to provide the following services to the ${aLabel}: ${data.scope}</p>`;
+    body += `<h4>2. Compensation</h4><p>In consideration of the services rendered, the ${aLabel} shall pay the ${bLabel} a total fee of <b>${fmtINR(data.amount)}</b>. Payment Terms: ${data.paymentTerms}.</p>`;
+    body += `<h4>3. Timeline</h4><p>The work shall be completed within: ${data.duration}.</p>`;
+    body += `<h4>4. Ownership & IP</h4><p>Upon full payment, all deliverables and intellectual property created under this Agreement shall be transferred to and owned exclusively by the ${aLabel}, unless otherwise agreed in writing.</p>`;
+    body += `<h4>5. Confidentiality</h4><p>Both Parties agree to keep confidential all non-public information exchanged during the course of this engagement.</p>`;
+    body += `<h4>6. Termination</h4><p>Either Party may terminate this Agreement with 15 days written notice. Fees for work completed up to the termination date shall remain payable.</p>`;
+    body += `<h4>7. Governing Law</h4><p>This Agreement shall be governed by the laws of India, with jurisdiction limited to the courts of ${data.jurisdiction}.</p>`;
+  }
+
+  if(type === 'nda'){
+    body += `<h4>1. Purpose</h4><p>The Parties wish to explore the following purpose, which may require disclosure of confidential information: ${data.purpose}.</p>`;
+    body += `<h4>2. Confidential Information</h4><p>"Confidential Information" means any non-public business, technical, financial, or proprietary information disclosed by the ${aLabel} to the ${bLabel}, whether oral, written, or electronic.</p>`;
+    body += `<h4>3. Obligations of Receiving Party</h4><p>The ${bLabel} agrees to: (a) hold the Confidential Information in strict confidence; (b) not disclose it to any third party without prior written consent; (c) use it solely for the stated Purpose.</p>`;
+    body += `<h4>4. Term</h4><p>This Agreement and the confidentiality obligations herein shall remain in effect for a period of: ${data.duration}.</p>`;
+    body += `<h4>5. Exclusions</h4><p>Confidential Information does not include information that is publicly available, independently developed, or lawfully obtained from another source without restriction.</p>`;
+    body += `<h4>6. Remedies</h4><p>Any breach of this Agreement may cause irreparable harm, entitling the disclosing Party to seek injunctive relief in addition to any other legal remedies available.</p>`;
+    body += `<h4>7. Governing Law</h4><p>This Agreement shall be governed by the laws of India, with jurisdiction limited to the courts of ${data.jurisdiction}.</p>`;
+  }
+
+  if(type === 'rental'){
+    body += `<h4>1. Property</h4><p>The ${aLabel} agrees to lease to the ${bLabel} the property located at: <b>${data.propertyAddress}</b> ("the Property").</p>`;
+    body += `<h4>2. Lease Term</h4><p>The lease shall commence on ${fmtDate(data.effectiveDate)} and continue for a period of: ${data.duration}.</p>`;
+    body += `<h4>3. Rent</h4><p>The ${bLabel} shall pay a monthly rent of <b>${fmtINR(data.amount)}</b>. Due Date/Terms: ${data.paymentTerms}.</p>`;
+    body += `<h4>4. Security Deposit</h4><p>The ${bLabel} shall pay a refundable security deposit of <b>${fmtINR(data.deposit)}</b> prior to occupancy, refundable at the end of the tenancy subject to deductions for damages, if any.</p>`;
+    body += `<h4>5. Maintenance</h4><p>The ${bLabel} shall maintain the Property in good condition. Structural repairs shall be the responsibility of the ${aLabel}.</p>`;
+    body += `<h4>6. Termination</h4><p>Either Party may terminate this Agreement by providing one month's written notice, or as mutually agreed.</p>`;
+    body += `<h4>7. Governing Law</h4><p>This Agreement shall be governed by the laws of India, with jurisdiction limited to the courts of ${data.jurisdiction}.</p>`;
+  }
+
+  if(type === 'employment'){
+    body += `<h4>1. Position</h4><p>The ${bLabel} is offered the position of <b>${data.designation}</b> with the ${aLabel}, effective from ${fmtDate(data.effectiveDate)}.</p>`;
+    body += `<h4>2. Compensation</h4><p>The ${bLabel} shall receive an annual CTC of <b>${fmtINR(data.amount)}</b>. Payment Cycle: ${data.paymentTerms}.</p>`;
+    body += `<h4>3. Probation</h4><p>The ${bLabel} shall be on probation for: ${data.duration}, during which either Party may terminate employment with shorter notice as per company policy.</p>`;
+    body += `<h4>4. Duties</h4><p>The ${bLabel} shall perform duties as assigned by the ${aLabel} consistent with the position and shall adhere to company policies and code of conduct.</p>`;
+    body += `<h4>5. Confidentiality</h4><p>The ${bLabel} agrees to maintain confidentiality of all proprietary and business information of the ${aLabel}, during and after employment.</p>`;
+    body += `<h4>6. Termination</h4><p>Post-probation, either Party may terminate this employment with 30 days written notice or payment in lieu thereof, as per applicable policy.</p>`;
+    body += `<h4>7. Governing Law</h4><p>This offer and employment terms shall be governed by the laws of India, with jurisdiction limited to the courts of ${data.jurisdiction}.</p>`;
+  }
+
+  if(type === 'consulting'){
+    body += `<h4>1. Scope of Services</h4><p>The ${bLabel} shall provide the following consulting services to the ${aLabel}: ${data.scope}</p>`;
+    body += `<h4>2. Fees</h4><p>The ${aLabel} shall pay the ${bLabel} a consulting fee of <b>${fmtINR(data.amount)}</b>. Fee Structure: ${data.paymentTerms}.</p>`;
+    body += `<h4>3. Engagement Duration</h4><p>This engagement shall continue for: ${data.duration}.</p>`;
+    body += `<h4>4. Independent Contractor</h4><p>The ${bLabel} shall act as an independent contractor and not as an employee, agent, or partner of the ${aLabel}.</p>`;
+    body += `<h4>5. Confidentiality</h4><p>Both Parties agree to keep confidential all proprietary information exchanged during this engagement.</p>`;
+    body += `<h4>6. Termination</h4><p>Either Party may terminate this Agreement with 15 days written notice, with fees payable for services rendered up to that date.</p>`;
+    body += `<h4>7. Governing Law</h4><p>This Agreement shall be governed by the laws of India, with jurisdiction limited to the courts of ${data.jurisdiction}.</p>`;
+  }
+
+  if(type === 'loan'){
+    const interestClause = data.interestRate ? `an interest rate of <b>${data.interestRate}% per annum</b>` : `<b>no interest (interest-free loan)</b>`;
+    body += `<h4>1. Loan Amount</h4><p>The ${aLabel} agrees to lend the ${bLabel} a sum of <b>${fmtINR(data.amount)}</b> on ${fmtDate(data.effectiveDate)}, subject to the terms herein.</p>`;
+    body += `<h4>2. Interest</h4><p>The loan shall carry ${interestClause}.</p>`;
+    body += `<h4>3. Repayment</h4><p>The ${bLabel} agrees to repay the full amount within: ${data.duration}. Repayment Schedule: ${data.paymentTerms}.</p>`;
+    body += `<h4>4. Default</h4><p>In the event of default or delayed payment, the ${aLabel} reserves the right to charge reasonable penal interest and pursue recovery through legal means.</p>`;
+    body += `<h4>5. Prepayment</h4><p>The ${bLabel} may prepay the outstanding loan amount, in part or full, at any time without penalty, unless otherwise agreed.</p>`;
+    body += `<h4>6. Governing Law</h4><p>This Agreement shall be governed by the laws of India, with jurisdiction limited to the courts of ${data.jurisdiction}.</p>`;
+  }
+
+  if(type === 'partnership'){
+    body += `<h4>1. Business</h4><p>The Parties agree to carry on business together under the name <b>"${data.businessName}"</b>, engaged in: ${data.scope}.</p>`;
+    body += `<h4>2. Capital Contribution</h4><p>The total capital investment for the partnership shall be <b>${fmtINR(data.amount)}</b>, contributed by the Partners as mutually agreed.</p>`;
+    body += `<h4>3. Profit & Loss Sharing</h4><p>Profits and losses of the business shall be shared between the Partners in the ratio of: <b>${data.profitSplit}</b>.</p>`;
+    body += `<h4>4. Duties</h4><p>Both Partners shall devote reasonable time and effort to the business and act in good faith and in the best interests of the partnership at all times.</p>`;
+    body += `<h4>5. Term</h4><p>This partnership shall continue for: ${data.duration}, unless dissolved earlier by mutual written consent.</p>`;
+    body += `<h4>6. Dissolution</h4><p>Upon dissolution, assets and liabilities of the business shall be settled and distributed between the Partners as per their respective sharing ratio.</p>`;
+    body += `<h4>7. Governing Law</h4><p>This Agreement shall be governed by the laws of India, with jurisdiction limited to the courts of ${data.jurisdiction}.</p>`;
+  }
+
+  body += `<h4>General Provisions</h4><p>This Agreement constitutes the entire understanding between the Parties and supersedes all prior discussions or agreements, whether oral or written, relating to the subject matter herein. Any amendment to this Agreement must be made in writing and signed by both Parties.</p>`;
+
+  body += `
+    <div class="sign-block">
+      <div>
+        <div class="sign-name">${data.sigA || ''}</div>
+        <div class="sign-box">
+          <b>${data.partyAName || aLabel}</b><br>
+          ${aLabel}<br>
+          Date: ${fmtDate(data.effectiveDate)}
+        </div>
+      </div>
+      <div>
+        <div class="sign-name">${data.sigB || ''}</div>
+        <div class="sign-box">
+          <b>${data.partyBName || bLabel}</b><br>
+          ${bLabel}<br>
+          Date: ${fmtDate(data.effectiveDate)}
+        </div>
+      </div>
+    </div>
+  `;
+
+  return `
+    <h2>${title}</h2>
+    <div class="sub">Generated on ${genDate} | IncomeAIHub Contract Generator Pro</div>
+    ${body}
+  `;
+}
+
+/* ============ GENERATE ============ */
+function generateContract(){
+  const data = collectData();
+  const missing = validateRequired(data);
+  if(missing.length){
+    showToast('⚠ Please fill: ' + missing[0].label);
+    document.getElementById(missing[0].id).focus();
+    return;
+  }
+  const html = buildContract(data);
+  document.getElementById('contractPreview').innerHTML = html;
+  showToast('✅ Contract generated successfully');
+}
+
+/* ============ COPY / DOWNLOAD ============ */
+function copyContract(){
+  const preview = document.getElementById('contractPreview');
+  if(preview.querySelector('.empty-note')){
+    showToast('⚠ Generate a contract first');
+    return;
+  }
+  const text = preview.innerText;
+  navigator.clipboard.writeText(text).then(()=>{
+    showToast('📋 Contract text copied');
+  }).catch(()=>{
+    showToast('⚠ Copy failed — select text manually');
+  });
+}
+
+function downloadPDF(){
+  const preview = document.getElementById('contractPreview');
+  if(preview.querySelector('.empty-note')){
+    showToast('⚠ Generate a contract first');
+    return;
+  }
+  window.print();
+}
+
+/* ============ DRAFTS (LocalStorage) ============ */
+const DRAFT_KEY = 'contractGenDrafts';
+
+function getDrafts(){
+  try{
+    return JSON.parse(localStorage.getItem(DRAFT_KEY)) || [];
+  }catch(e){ return []; }
+}
+
+function saveDraft(){
+  const data = collectData();
+  if(!data.partyAName && !data.partyBName){
+    showToast('⚠ Nothing to save yet');
+    return;
+  }
+  const drafts = getDrafts();
+  const name = `${contractTypes[data.type].label} - ${data.partyAName || 'Party A'} & ${data.partyBName || 'Party B'}`;
+  drafts.unshift({
+    id: Date.now(),
+    name,
+    savedOn: new Date().toLocaleDateString('en-IN'),
+    data
+  });
+  localStorage.setItem(DRAFT_KEY, JSON.stringify(drafts.slice(0,20)));
+  renderDrafts();
+  showToast('💾 Draft saved locally');
+}
+
+function renderDrafts(){
+  const drafts = getDrafts();
+  const container = document.getElementById('draftList');
+  if(!drafts.length){
+    container.innerHTML = `<div style="font-size:12px;color:var(--text-dim);">No saved drafts yet.</div>`;
+    return;
+  }
+  container.innerHTML = drafts.map(d => `
+    <div class="draft-item">
+      <span title="${d.name}">${d.name}</span>
+      <div class="draft-item-btns">
+        <button class="mini-btn" onclick="loadDraft(${d.id})">LOAD</button>
+        <button class="mini-btn del" onclick="deleteDraft(${d.id})">DEL</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function loadDraft(id){
+  const drafts = getDrafts();
+  const draft = drafts.find(d => d.id === id);
+  if(!draft) return;
+  typeSelect.value = draft.data.type;
+  renderFields();
+  setTimeout(()=>{
+    Object.keys(draft.data).forEach(key=>{
+      const el = document.getElementById(key);
+      if(el) el.value = draft.data[key];
+    });
+    showToast('📂 Draft loaded');
+  }, 10);
+}
+
+function deleteDraft(id){
+  let drafts = getDrafts();
+  drafts = drafts.filter(d => d.id !== id);
+  localStorage.setItem(DRAFT_KEY, JSON.stringify(drafts));
+  renderDrafts();
+  showToast('🗑 Draft deleted');
+}
+
+function clearForm(){
+  renderFields();
+  document.getElementById('contractPreview').innerHTML = `<div class="empty-note">Fill in the details on the left and click "Generate Contract" to see your live preview here.</div>`;
+  showToast('Form cleared');
+}
+
+renderDrafts();
+
+/* ============ HINDI GUIDE TOGGLE ============ */
+function toggleGuide(){
+  const body = document.getElementById('guideBody');
+  const chev = document.getElementById('chevIcon');
+  body.classList.toggle('open');
+  chev.classList.toggle('open');
+}
+</script>
+
+</body>
+</html>
